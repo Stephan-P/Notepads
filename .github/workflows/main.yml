@@ -35,7 +35,7 @@ on:
 
 jobs:
   setup:
-    runs-on: windows-latest
+    runs-on: windows-2022
     outputs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
     steps:
@@ -131,7 +131,7 @@ jobs:
 
   ci:
     needs: setup
-    runs-on: windows-latest
+    runs-on: windows-2022
     strategy:
       matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
     outputs:
@@ -341,7 +341,7 @@ jobs:
     # the target branch is 'master' and required parameter provided for release.
     if: needs.ci.outputs.new_version != ''
     needs: [ setup, ci ]
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       OLD_VERSION: ${{ needs.ci.outputs.old_version }}
       NEW_VERSION: ${{ needs.ci.outputs.new_version }}
