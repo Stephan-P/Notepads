@@ -121,7 +121,7 @@ jobs:
               }
             }
           }
-          echo "::set-output name=matrix::$($MATRIX | ConvertTo-Json -depth 32 -Compress)"
+          "matrix=$($MATRIX | ConvertTo-Json -depth 32 -Compress)" >> $env:GITHUB_OUTPUT
         env:
           FORK: ${{ github.event.repository.fork }}
           PARAM: ${{ github.event.inputs.param }}
@@ -151,11 +151,11 @@ jobs:
 
       - name: Setup MSBuild
         id: setup_msbuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
       - name: Setup NuGet
         id: setup-nuget
-        uses: NuGet/setup-nuget@v2.0.1
+        uses: NuGet/setup-nuget@v3.0.0
 
       - name: Checkout repository
         id: checkout_repo
